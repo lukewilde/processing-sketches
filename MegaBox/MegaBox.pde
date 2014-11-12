@@ -10,10 +10,13 @@ float speed = 0.05;
 int scalar = 60;
 float rotation = 0;
 
+float cameraX = 0;
+float cameraZ = 0;
+
 void setup() {
- size(800, 800, OPENGL);
- sideOffset = width / 2 - megaBoxSize / 2;
- noStroke();
+  size(800, 800, OPENGL);
+  sideOffset = width / 2 - megaBoxSize / 2;
+  noStroke();
 }
 
 void draw(){
@@ -27,7 +30,14 @@ void draw(){
 
    lights();
 
-  camera(mouseX * 4, mouseY * 4, 1200, width / 2, height / 2, 0, 0, -1, 0);
+   float mouseOffset = map(mouseX, 0, 360, 0, width);
+
+   cameraX = sin(mouseX * TWO_PI / 360) * megaBoxSize + width / 2;
+   cameraZ = cos(mouseX * TWO_PI / 360) * megaBoxSize;
+
+   println(cameraX, cameraZ);
+
+   camera(cameraX, height / 2, cameraZ, width / 2, height / 2, 0, 0, -1, 0);
 
    for (int i = 1; i < megaBoxSizeFactor; i ++) {
      for (int j = 1; j < megaBoxSizeFactor; j ++) {

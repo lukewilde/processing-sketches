@@ -18,6 +18,7 @@ void setup() {
   fill(0);
   frameRate(60);
   smooth();
+  println(goldenRatio);
 }
 
 void draw() {
