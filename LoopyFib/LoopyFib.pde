@@ -12,6 +12,7 @@ float angle = 0;
 float x = 0;
 float y = 0;
 float size = 0;
+float distanceRatio = 0;
 
 void setup() {
   size(400, 400);
@@ -28,16 +29,17 @@ void draw() {
   stepSize = destinationRadius / totalCircles;
 
   currentRadius = 0;
-  fill(150);
   stroke(50);
   background(204);
 
   for (int i = 1; i <= totalCircles; i++) {
 
-  angle = i * goldenRatio;
-  x = width / 2 + cos(angle) * currentRadius;
-  y = height / 2 + sin(angle) * currentRadius;
-  size = minSize + maxSize * norm(dist(200, 200, x, y), 0, 200);
+    angle = i * goldenRatio;
+    x = width / 2 + cos(angle) * currentRadius;
+    y = height / 2 + sin(angle) * currentRadius;
+    distanceRatio = norm(dist(200, 200, x, y), 0, 200);
+    size = minSize + maxSize * distanceRatio;
+    fill(255 * distanceRatio);
 
     ellipse(x, y, size, size);
     currentRadius += stepSize;
