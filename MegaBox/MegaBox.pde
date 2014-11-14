@@ -32,6 +32,7 @@ void draw(){
  lights();
 
  cameraX = sin(mouseX * TWO_PI / 720) * megaBoxSize + width / 2;
+ // Y rotation is a bit gnarley because the camera always faced the centre.
  cameraY = sin(mouseY * TWO_PI / 720) * megaBoxSize + height / 2;
  cameraZ = cos((mouseX + mouseY) * TWO_PI / 720) * megaBoxSize;
 
