@@ -5,11 +5,11 @@
  */
 
 
-size(600, 600);
+size(800, 800);
 
 float co; // color
-int accuracy = 200;  // Lower numbers are less accurate (lower resolution)
-float zoom = 200.0;  // Try these: 200 250 350 500 700 950 1250 1600 2000 2450 2950 3500
+int accuracy = 50;  // Lower numbers are less accurate (lower resolution)
+float zoom = 1000.0;  // Try these: 200 250 350 500 700 950 1250 1600 2000 2450 2950 3500
 float dx = width/2 - mouseX;
 float dy = height/2 - mouseY;
 float xscale = width / zoom;
