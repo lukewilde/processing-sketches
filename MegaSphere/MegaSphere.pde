@@ -4,7 +4,6 @@ int boxSize = 100;
 int padding = 0;
 int megaSphereSizeFactor = 10;
 int megaSphereSize = megaSphereSizeFactor * (boxSize + padding);
-int sideOffset = 0;
 float angle = 0;
 float speed = 0.05;
 int scalar = 60;
@@ -16,12 +15,11 @@ float cameraY = 0;
 
 void setup() {
   size(800, 800, OPENGL);
-  sideOffset = width / 2 - megaSphereSize / 2;
   noStroke();
 }
 
 void draw(){
-  background(100, 100, 150);
+  background(106, 106, 106);
 
   float currentX = 0;
   float currentY = 0;
@@ -34,26 +32,19 @@ void draw(){
   // cameraX = sin(mouseX * TWO_PI / 720) * megaSphereSize + width / 2;
   // // Y rotation is a bit gnarley because the camera always faced the centre.
   // cameraY = sin(mouseY * TWO_PI / 720) * megaSphereSize + height / 2;
-  // cameraZ = cos((mouseX + mouseY) * TWO_PI / 720) * megaSphereSize;
+  // cameraZ = cos((mouseX + mouseY) * TWO_PI / 720) * (megaSphereSize * 2);
 
-  // camera(cameraX, cameraY, cameraZ, width / 2, height / 2, 0, 0, -1, 0);
+  camera(0, 0, 3200, width / 2, height / 2, 0, 0, -1, 0);
 
-  for (int i = 1; i < megaSphereSizeFactor; i ++) {
+  drawGuideSphere();
+}
 
-    int numberOfBoxes = floor(sin(i * TWO_PI / 360) * megaSphereSizeFactor);
-    println(i * TWO_PI / 360);
+public void drawGuideSphere() {
+  pushMatrix();
 
-    for (int j = 1; j < numberOfBoxes; j ++) {
+  translate(width / 2, height / 2, 0);
 
-      currentX = sin(j * TWO_PI / 360) * numberOfBoxes;
-      currentY = j * (boxSize + padding);
-      currentZ = cos(j * TWO_PI / 360) * numberOfBoxes;
-
-      pushMatrix();
-      translate(currentX, currentY, currentZ);
-      fill(100, map(currentZ, 0, scalar, 0, 255), 200);
-      sphere(boxSize);
-      popMatrix();
-    }
-  }
+  fill(255, 255, 255, 100);
+  sphere(megaSphereSize);
+  popMatrix();
 }
