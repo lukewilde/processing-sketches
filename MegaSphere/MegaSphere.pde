@@ -2,8 +2,8 @@ import processing.opengl.*;
 
 int boxSize = 100;
 int padding = 0;
-int megaSphereSizeFactor = 10;
-int megaSphereSize = megaSphereSizeFactor * (boxSize + padding);
+int numberOfSpheresAtEquator = 10;
+int megaSphereSize = numberOfSpheresAtEquator * (boxSize + padding);
 float angle = 0;
 float speed = 0.05;
 int scalar = 60;
@@ -34,15 +34,26 @@ void draw(){
   // cameraY = sin(mouseY * TWO_PI / 720) * megaSphereSize + height / 2;
   // cameraZ = cos((mouseX + mouseY) * TWO_PI / 720) * (megaSphereSize * 2);
 
-  camera(0, 0, 3200, width / 2, height / 2, 0, 0, -1, 0);
+  camera(0, 0, 3200, 0, 0, 0, 0, -1, 0);
 
   drawGuideSphere();
+  // drawMegaSphere();
+}
+
+void drawMegaSphere() {
+
+  int currentNumberOfSpheres = 0;
+  float currentYOffset = 0;
+
+  for (int i = 1; i < numberOfSpheresAtEquator; i ++) {
+    currentYOffset = sin(i * TWO_PI);
+  }
 }
 
 public void drawGuideSphere() {
   pushMatrix();
 
-  translate(width / 2, height / 2, 0);
+  translate(0, 0, 0);
 
   fill(255, 255, 255, 100);
   sphere(megaSphereSize);
