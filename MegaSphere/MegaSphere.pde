@@ -1,9 +1,9 @@
 import processing.opengl.*;
 
-int boxSize = 100;
+int sphereSize = 100;
 int padding = 0;
 int numberOfSpheresAtEquator = 10;
-int megaSphereSize = numberOfSpheresAtEquator * (boxSize + padding);
+int megaSphereSize = numberOfSpheresAtEquator * (sphereSize + padding);
 float angle = 0;
 float speed = 0.05;
 int scalar = 60;
@@ -29,24 +29,37 @@ void draw(){
 
   lights();
 
-  // cameraX = sin(mouseX * TWO_PI / 720) * megaSphereSize + width / 2;
-  // // Y rotation is a bit gnarley because the camera always faced the centre.
-  // cameraY = sin(mouseY * TWO_PI / 720) * megaSphereSize + height / 2;
-  // cameraZ = cos((mouseX + mouseY) * TWO_PI / 720) * (megaSphereSize * 2);
+  cameraX = sin(mouseX * TWO_PI / 720) * megaSphereSize + width / 2;
+  // Y rotation is a bit gnarley because the camera always faced the centre.
+  cameraY = sin(mouseY * TWO_PI / 720) * megaSphereSize + height / 2;
+  cameraZ = cos((mouseX + mouseY) * TWO_PI / 720) * (megaSphereSize * 2);
 
-  camera(0, 0, 3200, 0, 0, 0, 0, -1, 0);
+  //camera(0, 0, 3200, 0, 0, 0, 0, -1, 0);
+  camera(cameraX, cameraY, cameraZ, width / 2, height / 2, 0, 0, -1, 0);
 
-  drawGuideSphere();
-  // drawMegaSphere();
+  // drawGuideSphere();
+  drawMegaSphere();
 }
 
 void drawMegaSphere() {
 
   int currentNumberOfSpheres = 0;
   float currentYOffset = 0;
+  float currentXOffset = 0;
+  float angle = 0;
 
-  for (int i = 1; i < numberOfSpheresAtEquator; i ++) {
-    currentYOffset = sin(i * TWO_PI);
+  for (int i = 1; i <= numberOfSpheresAtEquator; i ++) {
+    currentYOffset = sin(angle) * megaSphereSize;
+    currentXOffset = cos(angle) * megaSphereSize;
+    pushMatrix();
+
+    translate(currentXOffset, currentYOffset, 0);
+
+    fill(255, 0, 0);
+    box(sphereSize);
+    popMatrix();
+
+    angle += TWO_PI / numberOfSpheresAtEquator;
   }
 }
 
