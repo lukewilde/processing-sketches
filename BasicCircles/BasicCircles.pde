@@ -20,6 +20,6 @@ void draw(){
     x = sin(a) * radius + width / 2;
     y = cos(a) * radius + height / 2;
     ellipse(x, y, 10, 10);
-    a = a + inc;
+    a += inc;
   }
 }
