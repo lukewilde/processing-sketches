@@ -43,23 +43,37 @@ void draw(){
 
 void drawMegaSphere() {
 
-  int currentNumberOfSpheres = 0;
-  float currentYOffset = 0;
-  float currentXOffset = 0;
+  float currentRadius = 0;
+  float verticalPadding = megaSphereSize / numberOfSpheresAtEquator;
+  float radiusAngle = 0;
+  float radiusInc = TWO_PI / numberOfSpheresAtEquator;
+
+  for (int i = 1; i <= numberOfSpheresAtEquator; i++) {
+    drawSphereLayer(currentRadius, i * verticalPadding);
+    currentRadius = sin(radiusAngle) * megaSphereSize;
+    println(currentRadius);
+    radiusAngle += radiusInc;
+  }
+}
+
+public void drawSphereLayer(float radius, float y) {
+
   float angle = 0;
+  float currentZOffset = 0;
+  float currentXOffset = 0;
 
   for (int i = 1; i <= numberOfSpheresAtEquator; i ++) {
-    currentYOffset = sin(angle) * megaSphereSize;
-    currentXOffset = cos(angle) * megaSphereSize;
+    currentZOffset = sin(angle) * radius;
+    currentXOffset = cos(angle) * radius;
     pushMatrix();
 
-    translate(currentXOffset, currentYOffset, 0);
+    translate(currentXOffset, y, currentZOffset);
 
     fill(255, 0, 0);
     box(sphereSize);
     popMatrix();
 
-    angle += TWO_PI / numberOfSpheresAtEquator;
+    angle += TWO_PI / radius;
   }
 }
 
