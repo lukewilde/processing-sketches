@@ -37,21 +37,21 @@ void draw(){
   //camera(0, 0, 3200, 0, 0, 0, 0, -1, 0);
   camera(cameraX, cameraY, cameraZ, width / 2, height / 2, 0, 0, -1, 0);
 
-  // drawGuideSphere();
   drawMegaSphere();
+  // drawSphereLayer(300, 0);
 }
 
 void drawMegaSphere() {
 
   float currentRadius = 0;
-  float verticalPadding = megaSphereSize / numberOfSpheresAtEquator;
+  float verticalOffset = megaSphereSize / numberOfSpheresAtEquator +1;
   float radiusAngle = 0;
-  float radiusInc = TWO_PI / numberOfSpheresAtEquator;
+  float radiusInc = PI / numberOfSpheresAtEquator;
 
-  for (int i = 1; i <= numberOfSpheresAtEquator; i++) {
-    drawSphereLayer(currentRadius, i * verticalPadding);
+  for (int i = 1; i <= numberOfSpheresAtEquator +1; i++) {
     currentRadius = sin(radiusAngle) * megaSphereSize;
-    println(currentRadius);
+    drawSphereLayer(currentRadius, i * verticalOffset);
+    println(currentRadius, megaSphereSize);
     radiusAngle += radiusInc;
   }
 }
@@ -73,7 +73,7 @@ public void drawSphereLayer(float radius, float y) {
     box(sphereSize);
     popMatrix();
 
-    angle += TWO_PI / radius;
+    angle += TWO_PI / numberOfSpheresAtEquator;
   }
 }
 
