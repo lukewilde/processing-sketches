@@ -2,7 +2,7 @@ import processing.opengl.*;
 
 int sphereSize = 100;
 int padding = 0;
-int numberOfSpheresAtEquator = 10;
+int numberOfSpheresAtEquator = 20;
 int megaSphereSize = numberOfSpheresAtEquator * (sphereSize + padding);
 float angle = 0;
 float speed = 0.05;
@@ -44,14 +44,13 @@ void draw(){
 void drawMegaSphere() {
 
   float currentRadius = 0;
-  float verticalOffset = megaSphereSize / numberOfSpheresAtEquator +1;
+  float verticalOffset = megaSphereSize / numberOfSpheresAtEquator;
   float radiusAngle = 0;
   float radiusInc = PI / numberOfSpheresAtEquator;
 
   for (int i = 1; i <= numberOfSpheresAtEquator +1; i++) {
     currentRadius = sin(radiusAngle) * megaSphereSize;
-    drawSphereLayer(currentRadius, i * verticalOffset);
-    println(currentRadius, megaSphereSize);
+    drawSphereLayer(currentRadius / 2, i * verticalOffset);
     radiusAngle += radiusInc;
   }
 }
