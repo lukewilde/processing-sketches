@@ -1,10 +1,10 @@
 float a = 0;
-int numberOfLines = 400;
+int numberOfLines = 15;
 int maxWidth = 800;
 int maxHeight = 300;
 float lineHeight = 80;
 int padding = 20;
-float inc = PI / 90;
+float inc = PI / 180;
 float x = 0;
 float y1 = 0;
 float y2 = 0;
@@ -24,9 +24,9 @@ void draw(){
   for (int i = 1; i <= numberOfLines -1; i++) {
 
     x = padding + maxWidth / numberOfLines * i;
-    y1 = sin(radix[i]) * (height / 3) + height / 3;
+    y1 = sin(radix[i]) * (height / 3) + height / 3  + lineHeight / 3;
     y2 = y1 + lineHeight;
     line(x, y1, x, y2);
-    radix[i] += inc * (i * 0.001);
+    radix[i] += inc * ((i + 10) * 0.4);
   }
 }
