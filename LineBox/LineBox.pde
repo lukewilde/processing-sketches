@@ -29,15 +29,12 @@ void drawCornerLines(float sourceX, float sourceY) {
   float[][] lines = getLinesForCorner(sourceX, sourceY);
 
   for (int i = 0; i < lines.length; i++) {
-    println(sourceX, sourceY, "x: " + lines[i][0] + ", y: " + lines[i][1]);
     line(sourceX, sourceY, lines[i][0], lines[i][1]);
-    // println(sourceX, sourceY);
   }
 }
 
 float[][] getLinesForCorner(float sourceX, float sourceY) {
   float incrementor = size / numberOfLines;
-
 
   // x: 0, y: 0 = x+
   // x: 1, y: 0 = y+
@@ -46,22 +43,16 @@ float[][] getLinesForCorner(float sourceX, float sourceY) {
 
   if (sourceY == 0) {
     // positive modulation
-    println("positive modulation");
   } else {
     // negative modulation
-    println("negative modulation");
     incrementor *= -1;
   }
 
-  println("sources", sourceX, sourceY);
-
   if (sourceX == sourceY) {
     // modulate x
-    println("modulate x");
     return getLines(sourceX, incrementor, sourceY, 0);
   } else {
     // modulate y
-    println("modulate y");
     return getLines(sourceX, 0, sourceY, incrementor);
   }
 }
@@ -87,7 +78,6 @@ float[][] getLines(float startingX, float xIncrementor, float startingY, float y
     } else if (points[i][1] == 0) {
       points[i][1] = 400;
     }
-
   }
 
   return points;
