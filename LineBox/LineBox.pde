@@ -12,20 +12,32 @@ void setup() {
 void draw(){
   background(0, 43, 55);
 
-  stroke(39, 169, 17);
-  drawnCornerLines(getLinePoints(0, 0));
+  drawCornerLines(0, 0);
+  drawCornerLines(1, 0);
+  drawCornerLines(1, 1);
+  drawCornerLines(0, 1);
+  // exit();
 }
 
-void drawnCornerLines(float[][] points) {
-  for (int i = 0; i < points.length; i++) {
-    println("x: " + points[i][0] + ", y: " + points[i][1]);
+void drawCornerLines(float sourceX, float sourceY) {
+
+  stroke(39, 169, 17);
+
+  sourceX *= size;
+  sourceY *= size;
+
+  float[][] lines = getLinesForCorner(sourceX, sourceY);
+
+  for (int i = 0; i < lines.length; i++) {
+    println(sourceX, sourceY, "x: " + lines[i][0] + ", y: " + lines[i][1]);
+    line(sourceX, sourceY, lines[i][0], lines[i][1]);
+    // println(sourceX, sourceY);
   }
 }
 
-float[][] getLinePoints(float sourceX, float sourceY) {
-  sourceX = sourceX / size;
-  sourceY = sourceY / size;
+float[][] getLinesForCorner(float sourceX, float sourceY) {
   float incrementor = size / numberOfLines;
+
 
   // x: 0, y: 0 = x+
   // x: 1, y: 0 = y+
@@ -34,29 +46,48 @@ float[][] getLinePoints(float sourceX, float sourceY) {
 
   if (sourceY == 0) {
     // positive modulation
+    println("positive modulation");
   } else {
     // negative modulation
+    println("negative modulation");
     incrementor *= -1;
   }
 
+  println("sources", sourceX, sourceY);
+
   if (sourceX == sourceY) {
     // modulate x
-    return getPointsFor(sourceX, incrementor, sourceY, 0);
+    println("modulate x");
+    return getLines(sourceX, incrementor, sourceY, 0);
   } else {
     // modulate y
-    return getPointsFor(sourceX, 0, sourceY, incrementor);
+    println("modulate y");
+    return getLines(sourceX, 0, sourceY, incrementor);
   }
 }
 
-float[][] getPointsFor(float startingX, float xIncrementor, float startingY, float yIncrementor) {
+float[][] getLines(float startingX, float xIncrementor, float startingY, float yIncrementor) {
 
   float[][] points = new float[numberOfLines][2];
   float currentX = startingX;
   float currentY = startingY;
 
   for (int i = 0; i < numberOfLines; ++i) {
-    points[i][0] = currentX += (startingX + xIncrementor);
-    points[i][1] = currentY += (startingY + yIncrementor);
+    points[i][0] = currentX += xIncrementor;
+    points[i][1] = currentY += yIncrementor;
+
+    if (points[i][0] == size) {
+      points[i][0] = 0;
+    } else if (points[i][0] == 0) {
+      points[i][0] = 400;
+    }
+
+    if (points[i][1] == size) {
+      points[i][1] = 0;
+    } else if (points[i][1] == 0) {
+      points[i][1] = 400;
+    }
+
   }
 
   return points;
