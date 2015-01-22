@@ -1,10 +1,12 @@
 // source: http://i.imgur.com/U5rGnZ2.jpg
 
 int size = 800;
+float floatSize = 0;
 int numberOfLines = 1;
 
 void setup() {
   size(size, size);
+  floatSize = size;
   background(0, 43, 55);
   frameRate(60);
 }
@@ -25,8 +27,8 @@ void drawCornerLines(float sourceX, float sourceY) {
 
   stroke(39, 169, 17);
 
-  sourceX *= size;
-  sourceY *= size;
+  sourceX *= floatSize;
+  sourceY *= floatSize;
 
   float[][] lines = getLinesForCorner(sourceX, sourceY);
 
@@ -36,7 +38,7 @@ void drawCornerLines(float sourceX, float sourceY) {
 }
 
 float[][] getLinesForCorner(float sourceX, float sourceY) {
-  float incrementor = size / numberOfLines;
+  float incrementor = floatSize / numberOfLines;
 
   // x: 0, y: 0 = x+
   // x: 1, y: 0 = y+
@@ -69,16 +71,16 @@ float[][] getLines(float startingX, float xIncrementor, float startingY, float y
     points[i][0] = currentX += xIncrementor;
     points[i][1] = currentY += yIncrementor;
 
-    if (points[i][0] == size) {
+    if (points[i][0] == floatSize) {
       points[i][0] = 0;
     } else if (points[i][0] == 0) {
-      points[i][0] = size;
+      points[i][0] = floatSize;
     }
 
-    if (points[i][1] == size) {
+    if (points[i][1] == floatSize) {
       points[i][1] = 0;
     } else if (points[i][1] == 0) {
-      points[i][1] = size;
+      points[i][1] = floatSize;
     }
   }
 
