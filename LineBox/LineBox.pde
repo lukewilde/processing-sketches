@@ -1,7 +1,7 @@
 // source: http://i.imgur.com/U5rGnZ2.jpg
 
-int size = 400;
-int numberOfLines = 10;
+int size = 800;
+int numberOfLines = 1;
 
 void setup() {
   size(size, size);
@@ -10,13 +10,15 @@ void setup() {
 }
 
 void draw(){
+
+  numberOfLines ++;
+
   background(0, 43, 55);
 
   drawCornerLines(0, 0);
   drawCornerLines(1, 0);
   drawCornerLines(1, 1);
   drawCornerLines(0, 1);
-  // exit();
 }
 
 void drawCornerLines(float sourceX, float sourceY) {
@@ -70,13 +72,13 @@ float[][] getLines(float startingX, float xIncrementor, float startingY, float y
     if (points[i][0] == size) {
       points[i][0] = 0;
     } else if (points[i][0] == 0) {
-      points[i][0] = 400;
+      points[i][0] = size;
     }
 
     if (points[i][1] == size) {
       points[i][1] = 0;
     } else if (points[i][1] == 0) {
-      points[i][1] = 400;
+      points[i][1] = size;
     }
   }
 
