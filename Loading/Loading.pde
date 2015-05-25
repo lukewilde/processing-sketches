@@ -1,5 +1,5 @@
 float a = 0;
-int numberOfLines = 15;
+int numberOfLines = 25;
 int maxWidth = 800;
 int maxHeight = 300;
 float lineHeight = 80;
