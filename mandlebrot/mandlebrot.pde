@@ -44,7 +44,7 @@ void brot(int acc){
         z2 = zz2;
         // Check if the modulus of complex num is within limit
         if ( sqrt((sq(z1) + sq(z2)) ) > 2 ) {
-          co = 0 + k/float(accuracy);
+          co = 1 - k/float(accuracy);
           break; // NOTE: This is new syntax!!!
         }
       }
